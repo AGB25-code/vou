@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Junta-te à VO.U. e torna-te voluntário. Inscreve-te agora e faz parte da mudança!">
+  <title>Inscreve-te | VO.U. - Associação de Voluntariado</title>
+
+  <link rel="icon" type="image/png" href="favicon.png?v=2">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    .form-steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-12);
+      position: relative;
+    }
+
+    .form-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 25%;
+      right: 25%;
+      height: 2px;
+      background: var(--border-color);
+      z-index: -1;
+    }
+
+    .form-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .form-step__number {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--color-light);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: var(--font-bold);
+      transition: var(--transition-base);
+    }
+
+    .form-step.active .form-step__number {
+      background: var(--color-primary);
+      color: white;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .form-step.completed .form-step__number {
+      background: var(--color-success);
+      color: white;
+    }
+
+    .form-step__label {
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .form-step.active .form-step__label {
+      color: var(--color-primary);
+    }
+
+    .form-content {
+      display: none;
+    }
+
+    .form-content.active {
+      display: block;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .form-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: var(--space-8);
+      gap: var(--space-4);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 767px) {
+      .form-steps::before {
+        display: none;
+      }
+
+      .form-navigation {
+        flex-direction: column-reverse;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-to-main">Saltar para o conteúdo principal</a>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header" id="header">
+    <div class="container header__container">
+      <!-- Logo -->
+      <a href="index.html" class="header__logo">
+        <img src="images/logos/logo.png" alt="VO.U. - Associação de Voluntariado Universitário" class="header__logo-img">
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav">
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+          <span class="nav__toggle-line"></span>
+        </button>
+
+        <ul class="nav__list" id="nav-menu">
+          <li class="nav__item">
+            <a href="index.html" class="nav__link" data-i18n="nav.home">Início</a>
+          </li>
+          <li class="nav__item">
+            <a href="sobre.html" class="nav__link" data-i18n="nav.about">Sobre</a>
+          </li>
+          <li class="nav__item">
+            <a href="nucleos.html" class="nav__link" data-i18n="nav.cores">Núcleos</a>
+          </li>
+          <li class="nav__item">
+            <a href="projetos.html" class="nav__link" data-i18n="nav.projects">Projetos</a>
+          </li>
+          <li class="nav__item">
+            <a href="atividades.html" class="nav__link">Atividades</a>
+          </li>
+          <li class="nav__item">
+            <a href="contactos.html" class="nav__link" data-i18n="nav.contact">Contactos</a>
+          </li>
+          <li class="nav__item nav__cta">
+            <a href="inscricoes.html" class="btn btn-primary active" data-i18n="nav.join">Junta-te a Nós</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" style="min-height: 50vh;">
+      <div class="hero__background">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, var(--color-yellow-800) 0%, var(--color-yellow-900) 100%);"></div>
+      </div>
+      <div class="hero__content">
+        <h1 class="hero__title">Faz Parte da Mudança</h1>
+        <p class="hero__description">
+          Torna-te voluntário e junta-te a centenas de jovens que dedicam o seu tempo a transformar vidas.
+        </p>
+      </div>
+    </section>
+
+    <!-- Why Join Section -->
+    <section class="section" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-header__subtitle">Porque Juntar-se</p>
+          <h2 class="section-header__title">O Que Oferecemos</h2>
+        </div>
+
+        <div class="grid grid-4">
+          <div class="card">
+            <div class="card__body text-center">
+              <div style="font-size: 2.5rem; color: var(--color-primary); margin-bottom: var(--space-3);">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h4 class="card__title">Formação</h4>
+              <p class="card__text">Descobre workshops e formações gratuitas que te ajudam a crescer pessoal e profissionalmente.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__body text-center">
+              <div style="font-size: 2.5rem; color: var(--color-secondary); margin-bottom: var(--space-3);">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h4 class="card__title">Certificação</h4>
+              <p class="card__text">Recebe reconhecimento oficial pelas horas de voluntariado que realizas.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__body text-center">
+              <div style="font-size: 2.5rem; color: var(--color-success); margin-bottom: var(--space-3);">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4 class="card__title">Comunidade</h4>
+              <p class="card__text">Faz parte de uma rede de jovens motivados, com quem partilhas valores e experiências únicas.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__body text-center">
+              <div style="margin-bottom: var(--space-3);">
+                <img src="images/logos/tsuru-amarelo.png" alt="Tsuru" style="height: 2.5rem;">
+              </div>
+              <h4 class="card__title">Impacto</h4>
+              <p class="card__text">Contribui para causas reais e acompanha os resultados das tuas ações na sociedade.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banco de Voluntariado -->
+    <section class="section section-lg">
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="section-header">
+            <p class="section-header__subtitle">Banco de Voluntariado</p>
+            <h2 class="section-header__title">O Teu Primeiro Passo Para Seres VO.U.</h2>
+          </div>
+          <div style="text-align: center; margin-bottom: var(--space-8);">
+            <p style="font-size: var(--text-lg); color: var(--text-secondary); line-height: var(--leading-relaxed); margin-bottom: var(--space-6);">
+              O Banco de Voluntariado é a nossa base de dados central e o ponto de partida para todos os que querem colaborar connosco. A inscrição no Banco é obrigatória para quem pretende fazer parte da VO.U., garantindo que ficas ligado à nossa rede e acompanhas todas as oportunidades em primeira mão.
+            </p>
+          </div>
+          <div class="grid grid-3" style="margin-bottom: var(--space-8); grid-template-columns: repeat(3, 1fr);">
+            <div class="card">
+              <div class="card__body text-center">
+                <div style="font-size: 2rem; color: var(--color-primary); margin-bottom: var(--space-3);"><i class="fas fa-bullhorn"></i></div>
+                <h4 class="card__title">Abertura de Vagas</h4>
+                <p class="card__text">Serás o primeiro a saber quando abrem as candidaturas para os nossos projetos e núcleos.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__body text-center">
+                <div style="font-size: 2rem; color: var(--color-secondary); margin-bottom: var(--space-3);"><i class="fas fa-calendar-check"></i></div>
+                <h4 class="card__title">Atividades Pontuais</h4>
+                <p class="card__text">Receberás convites para eventos especiais da VO.U., como o VO.U. Mais Longe ou a Corrida Solidária.</p>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__body text-center">
+                <div style="font-size: 2rem; color: var(--color-info); margin-bottom: var(--space-3);"><i class="fas fa-handshake"></i></div>
+                <h4 class="card__title">Parcerias de Mobilização</h4>
+                <p class="card__text">Partilhamos oportunidades de voluntariado fora da VO.U., através das nossas parcerias com diversas instituições.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section class="section section-lg" style="background: var(--bg-secondary);">
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="section-header">
+            <h2 class="section-header__title">Formulário de Inscrição</h2>
+            <p class="section-header__description">
+              Preenche o formulário abaixo e junta-te a nós. O processo é simples e rápido!
+            </p>
+          </div>
+
+          <!-- Form Steps Progress -->
+          <div class="form-steps">
+            <div class="form-step active" data-step="1">
+              <div class="form-step__number">1</div>
+              <div class="form-step__label">Informações Pessoais</div>
+            </div>
+            <div class="form-step" data-step="2">
+              <div class="form-step__number">2</div>
+              <div class="form-step__label">Motivação</div>
+            </div>
+            <div class="form-step" data-step="3">
+              <div class="form-step__number">3</div>
+              <div class="form-step__label">Disponibilidade</div>
+            </div>
+          </div>
+
+          <!-- Registration Form -->
+          <form id="registration-form" class="card" style="box-shadow: var(--shadow-xl);">
+            <div class="card__body" style="padding: var(--space-8);">
+
+              <!-- Step 1: Personal Information -->
+              <div class="form-content active" data-step="1">
+                <h3 class="mb-6">Informações Pessoais</h3>
+
+                <div class="form-group">
+                  <label for="nome" class="form-label form-label--required">Nome Completo</label>
+                  <input type="text" id="nome" name="nome" class="form-input" required>
+                </div>
+
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label for="email" class="form-label form-label--required">Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="telefone" class="form-label form-label--required">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" class="form-input" required>
+                  </div>
+                </div>
+
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label for="data-nascimento" class="form-label form-label--required">Data de Nascimento</label>
+                    <input type="date" id="data-nascimento" name="data-nascimento" class="form-input" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="genero" class="form-label">Género</label>
+                    <select id="genero" name="genero" class="form-select">
+                      <option value="">Selecione...</option>
+                      <option value="masculino">Masculino</option>
+                      <option value="feminino">Feminino</option>
+                      <option value="outro">Outro</option>
+                      <option value="prefiro-nao-dizer">Prefiro não dizer</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="grid grid-2">
+                  <div class="form-group">
+                    <label for="universidade" class="form-label form-label--required">Universidade/Instituição</label>
+                    <input type="text" id="universidade" name="universidade" class="form-input" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="curso" class="form-label">Curso</label>
+                    <input type="text" id="curso" name="curso" class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="ano-academico" class="form-label">Ano Académico</label>
+                  <select id="ano-academico" name="ano-academico" class="form-select">
+                    <option value="">Selecione...</option>
+                    <option value="1">1º Ano</option>
+                    <option value="2">2º Ano</option>
+                    <option value="3">3º Ano</option>
+                    <option value="mestrado">Mestrado</option>
+                    <option value="doutoramento">Doutoramento</option>
+                    <option value="outro">Outro</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Step 2: Motivation -->
+              <div class="form-content" data-step="2">
+                <h3 class="mb-6">Motivação e Interesses</h3>
+
+                <div class="form-group">
+                  <label for="motivacao" class="form-label form-label--required">Porque queres ser voluntário?</label>
+                  <textarea id="motivacao" name="motivacao" class="form-textarea" rows="5" required
+                    placeholder="Conta-nos o que te motiva a juntar-te à VO.U. e como pensas contribuir..."></textarea>
+                  <span class="form-help">Mínimo 100 caracteres</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label form-label--required">Áreas de Interesse (seleciona todas as que se aplicam)</label>
+                  <div class="checkbox-group">
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-saude" name="interesses" value="saude" class="form-check-input">
+                      <label for="interesse-saude" class="form-check-label">Saúde</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-ambiente" name="interesses" value="ambiente" class="form-check-input">
+                      <label for="interesse-ambiente" class="form-check-label">Ambiente</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-social" name="interesses" value="social" class="form-check-input">
+                      <label for="interesse-social" class="form-check-label">Social</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-cultura" name="interesses" value="cultura" class="form-check-input">
+                      <label for="interesse-cultura" class="form-check-label">Cultura</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-direitos" name="interesses" value="direitos" class="form-check-input">
+                      <label for="interesse-direitos" class="form-check-label">Direitos Humanos</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="interesse-animais" name="interesses" value="animais" class="form-check-input">
+                      <label for="interesse-animais" class="form-check-label">Animais</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="projetos-preferidos" class="form-label">Projetos Preferidos</label>
+                  <select id="projetos-preferidos" name="projetos-preferidos" class="form-select" multiple size="6">
+                    <option value="cuidar">VO.U. Cuidar</option>
+                    <option value="natureza">VO.U. pela Natureza</option>
+                    <option value="animais">VO.U. pelos Animais</option>
+                    <option value="socorrer">VO.U. Socorrer</option>
+                    <option value="olhar-mundo">VO.U. Olhar o Mundo</option>
+                    <option value="formar">VO.U. Formar</option>
+                    <option value="acompanhar">VO.U. Acompanhar</option>
+                    <option value="crescer">VO.U. Crescer</option>
+                    <option value="pirueta">VO.U. Pirueta</option>
+                    <option value="rodar-cultura">VO.U. Rodar Cultura</option>
+                  </select>
+                  <span class="form-help">Mantém Ctrl (ou Cmd) pressionado para selecionar múltiplos</span>
+                </div>
+              </div>
+
+              <!-- Step 3: Availability -->
+              <div class="form-content" data-step="3">
+                <h3 class="mb-6">Disponibilidade e Experiência</h3>
+
+                <div class="form-group">
+                  <label for="disponibilidade" class="form-label form-label--required">Disponibilidade Semanal</label>
+                  <select id="disponibilidade" name="disponibilidade" class="form-select" required>
+                    <option value="">Selecione...</option>
+                    <option value="1-2h">1-2 horas por semana</option>
+                    <option value="3-5h">3-5 horas por semana</option>
+                    <option value="6-10h">6-10 horas por semana</option>
+                    <option value="10+h">Mais de 10 horas por semana</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Período Preferencial</label>
+                  <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                    <div class="form-check">
+                      <input type="checkbox" id="periodo-manha" name="periodo" value="manha" class="form-check-input">
+                      <label for="periodo-manha" class="form-check-label">Manhã (9h-13h)</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="periodo-tarde" name="periodo" value="tarde" class="form-check-input">
+                      <label for="periodo-tarde" class="form-check-label">Tarde (14h-18h)</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="periodo-noite" name="periodo" value="noite" class="form-check-input">
+                      <label for="periodo-noite" class="form-check-label">Noite (18h-22h)</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" id="periodo-fds" name="periodo" value="fim-de-semana" class="form-check-input">
+                      <label for="periodo-fds" class="form-check-label">Fim de semana</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label form-label--required">Tens experiência anterior em voluntariado?</label>
+                  <div style="display: flex; gap: var(--space-6);">
+                    <div class="form-check">
+                      <input type="radio" id="experiencia-sim" name="experiencia" value="sim" class="form-check-input">
+                      <label for="experiencia-sim" class="form-check-label">Sim</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" id="experiencia-nao" name="experiencia" value="nao" class="form-check-input">
+                      <label for="experiencia-nao" class="form-check-label">Não</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="competencias" class="form-label">Competências Especiais</label>
+                  <textarea id="competencias" name="competencias" class="form-textarea" rows="4"
+                    placeholder="Ex: Fotografia, design gráfico, primeiros socorros, línguas estrangeiras, etc."></textarea>
+                  <span class="form-help">Opcional - Ajuda-nos a conhecer melhor as tuas capacidades</span>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <input type="checkbox" id="termos" name="termos" class="form-check-input" required>
+                    <label for="termos" class="form-check-label">
+                      Aceito os termos e condições de participação na VO.U.
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-check">
+                    <input type="checkbox" id="gdpr" name="gdpr" class="form-check-input" required>
+                    <label for="gdpr" class="form-check-label">
+                      Autorizo o tratamento dos meus dados pessoais para efeitos de inscrição na VO.U.
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form Navigation -->
+              <div class="form-navigation">
+                <button type="button" id="prev-btn" class="btn btn-outline-primary" style="display: none;">
+                  <i class="fas fa-arrow-left"></i>
+                  Anterior
+                </button>
+                <div style="flex: 1;"></div>
+                <button type="button" id="next-btn" class="btn btn-primary">
+                  Próximo
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+                <button type="submit" id="submit-btn" class="btn btn-secondary" style="display: none;">
+                  <i class="fas fa-check"></i>
+                  Submeter Inscrição
+                </button>
+              </div>
+
+            </div>
+          </form>
+
+          <!-- Success Message (Hidden by default) -->
+          <div id="success-message" class="card" style="display: none; box-shadow: var(--shadow-xl); background: var(--color-success); color: white;">
+            <div class="card__body text-center" style="padding: var(--space-12);">
+              <div style="font-size: 4rem; margin-bottom: var(--space-4);">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <h2 style="color: white; margin-bottom: var(--space-4);">Inscrição Recebida com Sucesso!</h2>
+              <p style="font-size: var(--text-lg); margin-bottom: var(--space-6);">
+                Obrigado por te juntares à VO.U.! Entraremos em contacto contigo em breve.
+              </p>
+              <a href="index.html" class="btn btn-primary" style="background: white; color: var(--color-success); border-color: white;">
+                Voltar à Página Inicial
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- About Section -->
+        <div>
+          <h3 class="footer__section-title">VO.U.</h3>
+          <p style="color: rgba(255,255,255,0.8); margin-bottom: var(--space-4);" data-i18n="footer.about">
+            Associação de Voluntariado Universitário dedicada a transformar vidas desde 2008.
+          </p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/VO.U.associacao?locale=pt_PT" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/vou.associacao/" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/associacaovoluntariadouniversitariovou/" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="footer__section-title" data-i18n="footer.quickLinks">Links Rápidos</h3>
+          <ul class="footer__list">
+            <li><a href="sobre.html" class="footer__link" data-i18n="nav.about">Sobre Nós</a></li>
+            <li><a href="nucleos.html" class="footer__link" data-i18n="nav.cores">Núcleos</a></li>
+            <li><a href="projetos.html" class="footer__link" data-i18n="nav.projects">Projetos</a></li>
+            <li><a href="atividades.html" class="footer__link">Atividades</a></li>
+            <li><a href="faqs.html" class="footer__link" data-i18n="nav.faqs">FAQs</a></li>
+            <li><a href="inscricoes.html" class="footer__link" data-i18n="nav.join">Inscreve-te</a></li>
+          </ul>
+        </div>
+
+        <!-- Planos -->
+        <div>
+          <h3 class="footer__section-title">Planos</h3>
+          <ul class="footer__list">
+            <li><a href="projetos.html" class="footer__link">Plano Vida</a></li>
+            <li><a href="projetos.html" class="footer__link">Plano Ponte</a></li>
+            <li><a href="projetos.html" class="footer__link">Plano Mundo</a></li>
+          </ul>
+        </div>
+
+        <!-- Núcleos -->
+        <div>
+          <h3 class="footer__section-title">Núcleos</h3>
+          <ul class="footer__list">
+            <li><a href="nucleos.html" class="footer__link">Externo</a></li>
+            <li><a href="nucleos.html" class="footer__link">Criativo</a></li>
+            <li><a href="nucleos.html" class="footer__link">Cultural</a></li>
+            <li><a href="nucleos.html" class="footer__link">Gestão</a></li>
+            <li><a href="nucleos.html" class="footer__link">Interno</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="footer__section-title" data-i18n="footer.contactTitle">Contacto</h3>
+          <ul class="footer__list">
+            <li style="color: rgba(255,255,255,0.8);">
+              <i class="fas fa-map-marker-alt"></i>
+              A/C ICBAS:
+            </li>
+            <li style="color: rgba(255,255,255,0.8); padding-left: 1.5rem;">
+              Rua Jorge Viterbo Ferreira, 228
+            </li>
+            <li style="color: rgba(255,255,255,0.8); padding-left: 1.5rem;">
+              4050-313 Porto, Portugal
+            </li>
+            <li>
+              <a href="mailto:geral@vou.pt" class="footer__link">
+                <i class="fas fa-envelope"></i>
+                geral@vou.pt
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer__bottom">
+        <p data-i18n="footer.copyright">&copy; 2026 VO.U. - Associação de Voluntariado Universitário. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html>
